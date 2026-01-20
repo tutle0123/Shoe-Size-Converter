@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>신발 사이즈 변환기 - 미국 유럽 영국 일본 mm 정리</title>
+    <meta name="description" content="미국(US), 유럽(EU), 영국(UK) 신발 사이즈를 한국 mm 사이즈로 즉시 변환해보세요. 남성, 여성별 정확한 직구 사이즈 가이드를 제공합니다.">
+    <meta name="keywords" content="신발사이즈변환, 해외직구사이즈, 미국신발사이즈, 유럽신발사이즈, mm사이즈변환">
+    <link rel="canonical" href="https://tutle0123.github.io/Shoe-Size-Converter/">
+
+    <style>
+        body { font-family: 'Pretendard', sans-serif; display: flex; justify-content: center; padding: 20px; background-color: #f0f2f5; line-height: 1.6; }
+        .container { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 450px; }
+        h1 { font-size: 1.6rem; color: #1a1a1a; text-align: center; margin-bottom: 25px; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
+        input, select { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; font-size: 1rem; transition: border-color 0.3s; }
+        input:focus { border-color: #4f46e5; outline: none; }
+        .result-box { margin-top: 25px; background: #f8f9ff; border-radius: 15px; padding: 20px; border: 1px solid #eef2ff; }
+        .result-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #edf2f7; }
+        .result-item:last-child { border-bottom: none; }
+        .label-text { color: #666; font-size: 0.95rem; }
+        .value-text { color: #4f46e5; font-weight: 700; font-size: 1.1rem; }
+        .info-text { margin-top: 20px; font-size: 0.85rem; color: #888; background: #fffbeb; padding: 10px; border-radius: 8px; border-left: 4px solid #fbbf24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👟 신발 사이즈 변환기</h1>
+        
+        <div class="input-group">
+            <label>성별</label>
+            <select id="gender" onchange="convert()">
+                <option value="male">남성 / 남녀공용</option>
+                <option value="female">여성용</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>한국 사이즈 (mm)</label>
+            <input type="number" id="mm" placeholder="예: 270" oninput="convert()">
+        </div>
+
+        <div class="result-box">
+            <div class="result-item"><span class="label-text">미국 (US)</span> <span class="value-text" id="us">-</span></div>
+            <div class="result-item"><span class="label-text">유럽 (EU)</span> <span class="value-text" id="eu">-</span></div>
+            <div class="result-item"><span class="label-text">영국 (UK)</span> <span class="value-text" id="uk">-</span></div>
+            <div class="result-item"><span class="label-text">일본/센티 (cm)</span> <span class="value-text" id="jp">-</span></div>
+        </div>
+
+        <div class="info-text">
+            💡 브랜드(나이키, 아디다스 등)마다 실제 크기가 조금씩 다를 수 있으니 참고용으로 활용하세요!
+        </div>
+    </div>
+
+    <script>
+        function convert() {
+            const mm = parseFloat(document.getElementById('mm').value);
+            const gender = document.getElementById('gender').value;
+            if (!mm || mm < 150) return;
+
+            let us, eu, uk;
+            if (gender === 'male') {
+                us = ((mm - 180) / 10 + 1).toFixed(1);
+                eu = (mm / 10 + 15).toFixed(1);
+                uk = ((mm - 180) / 10 + 0.5).toFixed(1);
+            } else {
+                us = ((mm - 180) / 10 + 1.5).toFixed(1);
+                eu = (mm / 10 + 14.5).toFixed(1);
+                uk = ((mm - 180) / 10 + 1).toFixed(1);
+            }
+
+            document.getElementById('us').innerText = us;
+            document.getElementById('eu').innerText = eu;
+            document.getElementById('uk').innerText = uk;
+            document.getElementById('jp').innerText = (mm / 10) + " cm";
+        }
+    </script>
+</body>
+</html>
